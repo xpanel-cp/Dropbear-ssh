@@ -1,8 +1,7 @@
 #!/bin/bash
+echo "Install Dropbear ..."
 apt-get -y remove dropbear 1> /dev/null 2> /dev/null
 apt-get -y purge dropbear 1> /dev/null 2> /dev/null
-echo ""
-echo "Instalando Dropbear"
 
 apt-get install dropbear -y
 
