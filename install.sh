@@ -22,6 +22,6 @@ echo "DROPBEAR_EXTRA_ARGS='-p 442 -p 443 -p 80 -p 8080 -p 8484 -p 143 -p 109'" >
 service dropbear start 
 service dropbear restart 
 
-echo "puerto $port agregado"
+echo "Port Connection $port"
 
 echo "DROPBEAR CONFIGURADO."
