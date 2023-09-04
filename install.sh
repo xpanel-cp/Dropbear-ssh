@@ -23,6 +23,7 @@ echo "DROPBEAR_EXTRA_ARGS='-p 442 -p 443 -p 80 -p 8080 -p 8484 -p 143 -p 109'" >
 service dropbear start 
 service dropbear restart 
 curl -o /var/www/html/dropbear.sh https://raw.githubusercontent.com/xpanel-cp/Dropbear-ssh/main/dropbear.sh
+chmod +x /var/www/html/dropbear.sh
 sed -i "s/PORT_DROPBEAR=.*/PORT_DROPBEAR=$port/g" /var/www/html/app/.env
 (crontab -l | grep . ; echo -e "* * * * * /var/www/html/dropbear.sh") | crontab -
 echo "Port Connection $port"
