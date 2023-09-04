@@ -43,4 +43,4 @@ do
 done
 json_output="${json_output%,}"
 json_output+="]"
-echo "$json_output" > output.json
+echo "$json_output" > /var/www/html/app/storage/dropbear.json
