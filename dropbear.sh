@@ -1,7 +1,8 @@
 #!/bin/bash
 #XPanel Alireza
-i=0
-while [ 1i -lt 5 ]; do
+repeat_count=6
+
+for ((i = 0; i < $repeat_count; i++)); do
 json_output="["
 
 port_dropbear=$(ps aux | grep dropbear | awk NR==1 | awk '{print $17;}')
@@ -33,6 +34,7 @@ do
        while [ ${#PID} -lt 8 ]; do
            PID=$PID" "
        done
+       PID=$(echo $PID | sed -r -e "s/'/ /g" -e "s/ *$//" -e "s/ //g")
        user=$(echo $user | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')
        json_item="{"
        json_item+="\"user\": \"$user\", "
@@ -46,6 +48,5 @@ done
 json_output="${json_output%,}"
 json_output+="]"
 echo "$json_output" > /var/www/html/app/storage/dropbear.json
-sleep 10
-i=(( i + 1 ))
+sleep 9
 done
