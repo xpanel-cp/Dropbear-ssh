@@ -1,6 +1,6 @@
 #!/bin/bash
 #XPanel Alireza
-repeat_count=6
+repeat_count=3
 
 for ((i = 0; i < $repeat_count; i++)); do
 json_output="["
@@ -48,5 +48,5 @@ done
 json_output="${json_output%,}"
 json_output+="]"
 echo "$json_output" > /var/www/html/app/storage/dropbear.json
-sleep 9
+sleep 20
 done
