@@ -1,8 +1,6 @@
 #!/bin/bash
 #XPanel Alireza
-repeat_count=3
 
-for ((i = 0; i < $repeat_count; i++)); do
 json_output="["
 
 port_dropbear=$(ps aux | grep dropbear | awk NR==1 | awk '{print $17;}')
@@ -48,5 +46,3 @@ done
 json_output="${json_output%,}"
 json_output+="]"
 echo "$json_output" > /var/www/html/app/storage/dropbear.json
-sleep 15
-done
