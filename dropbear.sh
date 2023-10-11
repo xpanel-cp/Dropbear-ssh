@@ -48,5 +48,5 @@ done
 json_output="${json_output%,}"
 json_output+="]"
 echo "$json_output" > /var/www/html/app/storage/dropbear.json
-sleep 20
+sleep 15
 done
