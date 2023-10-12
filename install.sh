@@ -28,9 +28,12 @@ echo "DROPBEAR_DSSKEY='/etc/dropbear/dropbear_dss_host_key'" >> /etc/default/dro
 # network performance
 echo "DROPBEAR_RECEIVE_WINDOW=65536" >> /etc/default/dropbear
 
+systemctl daemon-reload
 service dropbear start 
 service dropbear restart 
 sed -i "s/DEFAULT_HOST =.*/DEFAULT_HOST = '127.0.0.1:${port}'/g" /usr/local/bin/wssd
+systemctl enable wssd
+systemctl restart wssd
 
 curl -o /var/www/html/dropbear.sh https://raw.githubusercontent.com/xpanel-cp/Dropbear-ssh/main/dropbear.sh
 chmod +x /var/www/html/dropbear.sh
