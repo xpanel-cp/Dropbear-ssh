@@ -19,6 +19,14 @@ echo "NO_START=0" >> /etc/default/dropbear
 echo "DROPBEAR_PORT=$port" >> /etc/default/dropbear
 #echo "DROPBEAR_EXTRA_ARGS='-p 442 -p 8080 -p 8484 -p 143 -p 109'" >> /etc/default/dropbear
 #echo "DROPBEAR_BANNER='/etc/banner'" >> /etc/default/dropbear
+# RSA hostkey file (default: /etc/dropbear/dropbear_rsa_host_key)
+echo "DROPBEAR_RSAKEY="/etc/dropbear/dropbear_rsa_host_key" >> /etc/default/dropbear
+
+# DSS hostkey file (default: /etc/dropbear/dropbear_dss_host_key)
+echo "DROPBEAR_DSSKEY="/etc/dropbear/dropbear_dss_host_key" >> /etc/default/dropbear
+# Receive window size - this is a tradeoff between memory and
+# network performance
+echo "DROPBEAR_RECEIVE_WINDOW=65536" >> /etc/default/dropbear
 
 service dropbear start 
 service dropbear restart 
