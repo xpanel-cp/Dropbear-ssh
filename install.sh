@@ -3,7 +3,7 @@
 echo "Install Dropbear ..."
 apt-get -y remove dropbear 1> /dev/null 2> /dev/null
 apt-get -y purge dropbear 1> /dev/null 2> /dev/null
-
+apt-get install jq -y
 apt-get install dropbear -y
 
 rm -rf /etc/default/dropbear
