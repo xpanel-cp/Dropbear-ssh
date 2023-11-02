@@ -2,11 +2,9 @@
 #!/bin/bash
 #XPanel Alireza
 
-if ! grep -q "{\"user\": \"\", \"PID\": \"\", \"waktu\": \"\"}" "/var/www/html/app/storage/dropbear.json"; then
-    # اگر متن وجود نداشته باشد، فایل را ایجاد کنید
+if [ ! -e "/var/www/html/app/storage/dropbear.json" ]; then
     touch "/var/www/html/app/storage/dropbear.json"
 fi
-
 idrop=0
 
 while [ $idrop -lt 10 ]; do
