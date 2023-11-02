@@ -1,5 +1,7 @@
 #!/bin/bash
 #XPanel Alireza
+i=0
+while [ 1i -lt 10 ]; do
 json_output="["
 
 port_dropbear=$(ps aux | grep dropbear | awk NR==1 | awk '{print $17;}')
@@ -44,3 +46,9 @@ done
 json_output="${json_output%,}"
 json_output+="]"
 echo "$json_output" > /var/www/html/app/storage/dropbear.json
+wait
+rm -fr /var/log/auth.log
+systemctl restart syslog
+sleep 5
+i=(( i + 1 ))
+done
