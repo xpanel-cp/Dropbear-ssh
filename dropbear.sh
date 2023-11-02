@@ -3,6 +3,7 @@
 
 if [ ! -e "/var/www/html/app/storage/dropbear.json" ]; then
     touch "/var/www/html/app/storage/dropbear.json"
+    chmod 644 /var/www/html/app/storage/dropbear.json
 fi
 idrop=0
 
