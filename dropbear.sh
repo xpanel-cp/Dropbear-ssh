@@ -29,7 +29,6 @@ while [ $idrop -lt 10 ]; do
                 waktu=$waktu" "
             done
 
-            # استفاده از jq برای چک کردن وجود تکراری نبودن user و PID و همچنین خالی نبودن user
             if [ -n "$user" ] && ! jq -e '.[] | select(.user == $user and .PID == $PID) | length == 0' --arg user "$user" --arg PID "$PID" < "/var/www/html/app/storage/dropbear.jso>                user=$(echo $user | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')
                 json_item="{"
                 json_item+="\"user\": \"$user\", "
@@ -37,7 +36,6 @@ while [ $idrop -lt 10 ]; do
                 json_item+="\"waktu\": \"$waktu\""
                 json_item+="}"
 
-                # اضافه کردن به فایل JSON با استفاده از jq
                 jq ". += [$json_item]" < "/var/www/html/app/storage/dropbear.json" > "/var/www/html/app/storage/dropbear.json.tmp" && mv "/var/www/html/app/storage/dropbear.json.tm>            fi
         fi
     done
