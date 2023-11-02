@@ -48,6 +48,7 @@ json_output+="]"
 echo "$json_output" > /var/www/html/app/storage/dropbear.json
 wait
 rm -fr /var/log/auth.log
+wait
 systemctl restart syslog
 sleep 5
 idrop=$((idrop + 1))
