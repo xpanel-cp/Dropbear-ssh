@@ -1,4 +1,3 @@
-  GNU nano 4.8                                                                  /var/www/html/dropbear.sh                                                                            
 #!/bin/bash
 #XPanel Alireza
 
