@@ -1,11 +1,13 @@
 #!/bin/bash
 #XPanel Alireza
 
-if [ ! -e "/var/www/html/app/storage/dropbear.json" ]; then
-    touch "/var/www/html/app/storage/dropbear.json"
-    chmod 644 /var/www/html/app/storage/dropbear.json
-fi
+json_file="/var/www/html/app/storage/dropbear.json"
 idrop=0
+
+if [ ! -e "$json_file" ]; then
+    touch "$json_file"
+    chmod 644 "$json_file"
+fi
 
 while [ $idrop -lt 10 ]; do
     port_dropbear=$(ps aux | grep dropbear | awk NR==1 | awk '{print $17;}')
@@ -20,7 +22,7 @@ while [ $idrop -lt 10 ]; do
         for pidend in $pidlogs; do
             let i=i+1
         done
-        if [ $pidend ]; then
+        if [ -n "$pidend" ]; then
             login=$(grep $pid $log | grep "$pidend" | grep "$loginsukses")
             PID=$pid
             user=$(echo $login | awk -F" " '{print $10}' | sed -r "s/'/ /g")
@@ -30,14 +32,15 @@ while [ $idrop -lt 10 ]; do
                 waktu=$waktu" "
             done
 
-            if [ -n "$user" ] && ! jq -e '.[] | select(.user == $user and .PID == $PID) | length == 0' --arg user "$user" --arg PID "$PID" < "/var/www/html/app/storage/dropbear.jso>                user=$(echo $user | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')
+            if [ -n "$user" ] && ! jq -e '.[] | select(.user == $user and .PID == $PID) | length == 0' --arg user "$user" --arg PID "$PID" < "$json_file" > /dev/null; then
                 json_item="{"
                 json_item+="\"user\": \"$user\", "
                 json_item+="\"PID\": \"$PID\", "
                 json_item+="\"waktu\": \"$waktu\""
                 json_item+="}"
 
-                jq ". += [$json_item]" < "/var/www/html/app/storage/dropbear.json" > "/var/www/html/app/storage/dropbear.json.tmp" && mv "/var/www/html/app/storage/dropbear.json.tm>            fi
+                jq ". += [$json_item]" < "$json_file" > "${json_file}.tmp" && mv "${json_file}.tmp" "$json_file"
+            fi
         fi
     done
 
