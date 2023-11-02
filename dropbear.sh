@@ -1,7 +1,7 @@
 #!/bin/bash
 #XPanel Alireza
 idrop=0
-while [ 1idrop -lt 10 ]; do
+while [ $idrop -lt 10 ]; do
 json_output="["
 
 port_dropbear=$(ps aux | grep dropbear | awk NR==1 | awk '{print $17;}')
@@ -50,5 +50,5 @@ wait
 rm -fr /var/log/auth.log
 systemctl restart syslog
 sleep 5
-idrop=(( idrop + 1 ))
+idrop=$((idrop + 1))
 done
