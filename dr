@@ -61,5 +61,9 @@ python3 /var/www/html/app/storage/removedupdrop.py
     sleep 5
     idrop=$((idrop + 1))
 done
+dropbear_status=$(service dropbear status)
+if [[ $dropbear_status == *"is not running"* ]]; then
+    service dropbear start
+fi
 #rm -fr /var/log/auth.log
 #systemctl restart syslog
