@@ -64,6 +64,7 @@ done
 dropbear_status=$(service dropbear status)
 if [[ $dropbear_status == *"is not running"* ]]; then
     service dropbear start
+echo "Start dropbear"
 fi
 #rm -fr /var/log/auth.log
 #systemctl restart syslog
