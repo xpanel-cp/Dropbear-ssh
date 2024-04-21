@@ -34,11 +34,27 @@ service dropbear restart
 sed -i "s/DEFAULT_HOST =.*/DEFAULT_HOST = '127.0.0.1:${port}'/g" /usr/local/bin/wssd
 systemctl enable wssd
 systemctl restart wssd
+sudo mkdir -p /xpanel
+curl -o /xpanel/dropbear.sh https://raw.githubusercontent.com/xpanel-cp/Dropbear-ssh/main/xpdropbear.sh
+sudo chown -R root:root /xpanel/dropbear.sh
+chmod +rx /xpanel/dropbear.sh
+cat > /etc/systemd/system/xpdropbear.service <<EOF
+[Unit]
+Description=XMonitor Dropbear
+After=network.target
 
-curl -o /var/www/html/dropbear.sh https://raw.githubusercontent.com/xpanel-cp/Dropbear-ssh/main/dropbear.sh
-chmod +x /var/www/html/dropbear.sh
+[Service]
+ExecStart=/xpanel/dropbear.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable xpdropbear >/dev/null 2>&1
+systemctl start xpdropbear
 sed -i "s/PORT_DROPBEAR=.*/PORT_DROPBEAR=$port/g" /var/www/html/app/.env
-(crontab -l | grep . ; echo -e "* * * * * /var/www/html/dropbear.sh") | crontab -
 echo "Port Connection $port"
 
 echo "DROPBEAR CONFIGURADO."
