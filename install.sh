@@ -55,6 +55,7 @@ systemctl daemon-reload
 systemctl enable xpdropbear >/dev/null 2>&1
 systemctl start xpdropbear
 sed -i "s/PORT_DROPBEAR=.*/PORT_DROPBEAR=$port/g" /var/www/html/app/.env
+crontab -l | sed '/dropbear\.sh/d' | crontab -
 echo "Port Connection $port"
 
 echo "DROPBEAR CONFIGURADO."
